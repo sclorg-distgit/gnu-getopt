@@ -34,7 +34,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.0.14
-Release:        5.11%{?dist}
+Release:        5.12%{?dist}
 Epoch:          0
 Summary:        Java getopt implementation
 License:        LGPLv2+
@@ -62,19 +62,19 @@ Summary:        Javadoc for %{pkg_name}
 
 %prep
 %setup -q -c -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 mv gnu/getopt/buildx.xml build.xml
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 ant jar javadoc
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 install -d -m 755 %{buildroot}%{_javadir}
 install -d -m 755 %{buildroot}%{_mavenpomdir}
@@ -98,6 +98,9 @@ cp -pr build/api/* %{buildroot}%{_javadocdir}/%{name}
 %{_javadocdir}/%{name}
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 0:1.0.14-5.12
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 0:1.0.14-5.11
 - maven33 rebuild
 
